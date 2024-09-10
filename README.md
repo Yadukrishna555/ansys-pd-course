@@ -11,7 +11,7 @@ Workshop Github material https://github.com/google/skywater-pdk https://github.c
 Day 1
 
 
-Screen clipping taken: 02-09-2024 00:37
+
 
 ![image](https://github.com/user-attachments/assets/67840a88-d9c3-4adb-9326-ef9bb90cb3c1)
 
@@ -20,24 +20,24 @@ Screen clipping taken: 02-09-2024 00:37
 
 
 
-Screen clipping taken: 02-09-2024 00:38
-
-
-
-
-
-Screen clipping taken: 02-09-2024 00:40
-
-
-
-
-Screen clipping taken: 02-09-2024 00:40
 
 
 
 
 
 
-Screen clipping taken: 02-09-2024 00:42
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ![image](https://github.com/user-attachments/assets/eb027915-0588-4002-9ecb-305d50223fc6)
