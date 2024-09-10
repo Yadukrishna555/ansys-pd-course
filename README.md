@@ -19,7 +19,8 @@ open lane directory structure
 
 ![image](https://github.com/user-attachments/assets/2e24fea1-633d-4267-bb3d-467f649e1f7d)
 
-![image](https://github.com/user-attachments/assets/fd2709db-b9bf-438d-a52a-fc00ab790c80)
 
+
+![image](https://github.com/user-attachments/assets/5b613966-4279-4824-9841-92fd778dfde0)
 
 
