@@ -86,13 +86,86 @@ Delay tables usage part 1:
  
  each buffer is characterized for range of slew and range of load caps
 
+Delay table of buffer with size 1
+![image](https://github.com/user-attachments/assets/5547cc01-401c-46f1-b8d4-ffe064d77cd6)
+
+
+When we are saying about changing the size of the buffer, we will be changing the W/L ratio of PMOS and NMOS. 
+
+Delay table of buffer with size 2
+
+![image](https://github.com/user-attachments/assets/c8cfc8f8-cd86-4796-8789-ecf364eaebeb)
+
+And when we are increasing the PMOS size, we are actually reducing the resistance.And by varying the resistance we will be varying the RC delay. 
+That's why we have individual delay tables for each buffer with different size.
+
+Extraploiting delay(clock latency) numbers using numerical methods deducing an equation from the delay tables.
+
+![image](https://github.com/user-attachments/assets/516580e7-6763-4cd6-a3c3-bfdefc2cee19)
+
+
+ Calculating delay for buffer size 2
+
+![image](https://github.com/user-attachments/assets/e1de7236-2e23-49a7-aabe-2a3ed872c779)
+
+Calculating latency in each branch
+
+![image](https://github.com/user-attachments/assets/5a4f3fd9-78c1-42e9-8191-0be98901c66c)
+
+x9' + y15
+
+Resultant skew seems to be zero 
+
+![image](https://github.com/user-attachments/assets/917ddbf7-0b63-475f-a347-0a71f9eb4d17)
+
+What if in each level we are driving different load? 
+Skew will be having a non zero value. 
+Clock Skew is the time difference between arrival of the same edge of a clock signal at the Clock pin of the capture flop and launch flop. 
+
+Power Aware CTS 
+
+![image](https://github.com/user-attachments/assets/d1a9843e-c0eb-418f-bf99-ad5c83817492)
+
+
+
+
+
+SK2
+
+Setup timing analysis and intro to flip flop setup time
+
+Timing analysis using ideal clocks
+
+Ideal scenario where clock trees are not yet build 
+
+![image](https://github.com/user-attachments/assets/67aa8bbc-5c97-4f33-8124-93bc1b5840a7)
+
+Combinaional delay should be less than clock period. 
+
+![image](https://github.com/user-attachments/assets/a38c468c-b224-4599-a0d4-a3295ae1e6c1)
+
+If delay exceeds the T, the clock period will be 
+
+![image](https://github.com/user-attachments/assets/d8b1afd6-b737-438e-b7c6-1cc0cd7cf57f)
+
+![image](https://github.com/user-attachments/assets/7717320e-ed3e-4109-932b-7a65d8ba9738)
+
+![image](https://github.com/user-attachments/assets/acfecf0c-6358-4602-bec8-96f4fa73e11a)
+
+Introduction to clock jitter and uncertainity. 
+
+![image](https://github.com/user-attachments/assets/af2370fd-f8ba-4e04-a820-27e008cc9541)
+
+Clock circuitry (PLLs) will not be able to egenrate clk perid with edge exactly at 0ns or tns. There will be inbuilt variation. 
 
 
 
 
 
 
- 
+
+
+
 
 
 
