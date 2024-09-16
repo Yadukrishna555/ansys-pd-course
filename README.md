@@ -597,8 +597,6 @@ SU -> Setup uncertainity
 
 ![image](https://github.com/user-attachments/assets/f6844902-bccf-4f96-ab01-9fb477941de4)
 
-<lab>
-
 
 SK3
 
@@ -696,10 +694,7 @@ Implementation: Typically, in multilayer PCBs, signal traces on one layer are pl
 
 Benefits: Ground planes not only reduce crosstalk but also improve signal integrity, reduce electromagnetic interference (EMI), and enhance the overall performance of high-speed circuits. 
 
-<lab> 
 
-
-SK4 
 
 Setup time analsysis using real clocks
 
@@ -783,6 +778,54 @@ Thus, jitter or uncertainty is less of a concern in **hold time analysis** becau
 
 ![image](https://github.com/user-attachments/assets/6815d8f3-5449-41be-9089-ded47a44205a)
 
+## lab ## 
+
+Updated all the libs & newly created lef of the inverter cell into src for picorv design directory.
+
+![image](https://github.com/user-attachments/assets/1f181e2e-a96e-45a9-989e-22386c09b5c2)
+
+Then updated the config.tcl file with paths for libs and lefs in config.tcl 
+
+![image](https://github.com/user-attachments/assets/535f4aa8-cd77-40c5-90f2-364bfb132a91)
+
+With updated config file, the design prep step is performed again 
+
+![image](https://github.com/user-attachments/assets/b8cc30b3-e2e3-454b-9e00-83a1353a780a)
+
+Running sythesis again 
+
+![image](https://github.com/user-attachments/assets/3cf51b82-614a-4f67-b1de-2cf62f0b3e73)
+
+Performing till placment
+![image](https://github.com/user-attachments/assets/0b307283-dbd8-46c5-882e-0613c2410edc)
+
+Running CTS
+
+![image](https://github.com/user-attachments/assets/45ff800e-a918-4b9f-ba3c-ef1912066cca)
+
+
+## Day 5 ##
+
+### PDN & Routing ###
+
+**Generating PDN**
+
+Running command : gen_pdn
+
+![image](https://github.com/user-attachments/assets/7c708db5-486a-4c69-9f45-7e640ba83e32)
+
+### Generated PDN ###
+
+![image](https://github.com/user-attachments/assets/7e855587-5ad8-461d-9ad7-a1017ce19e75)
+
+### Running Routing ###
+
+**run_routing**
+
+
+![image](https://github.com/user-attachments/assets/23aac568-286d-4a91-97ae-0e2a521525f5)
+
+  
 
 
 
