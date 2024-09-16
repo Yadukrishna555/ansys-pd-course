@@ -143,8 +143,7 @@ A single pathway for power delivery results in IR drop, even with decaps, as dec
 
 ### Pin Placement and logical pin placement blockage
 
-
-![image](https://github.com/user-attachments/assets/222163ec-dd1a-40c7-8548-ec01e60b5101)
+![image](https://github.com/user-attachments/assets/1280e292-b363-4d7e-8887-95ebf2373631)
 
 The area between the core and die is blocked off using logical cell placement blockages to prevent the placer from positioning cells there. Pins are placed in this region and can be equidistant or spaced randomly, depending on the block's input needs. Clock pins are larger than signal pins since they handle large fanout and require lower resistance.
 
