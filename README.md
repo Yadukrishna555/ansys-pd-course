@@ -134,9 +134,336 @@ Decoupling capacitors (decaps) act as local charge sources for instances, chargi
 ![image](https://github.com/user-attachments/assets/db711b5b-45d7-41a3-bcd4-a39579adfe83)
 
 Decaps will ensure all the switching captured and no crosstalk problems.
+
+### Power Planning ###
+
+![image](https://github.com/user-attachments/assets/906fd80a-a5bc-4633-af2d-8859b0a2fb4a)
+
 A single pathway for power delivery results in IR drop, even with decaps, as decaps can only charge up to Vsource - IR. Using a grid structure is crucial because it provides multiple pathways for different instances.
 
-**Day 4** 
+### Pin Placement and logical pin placement blockage
+
+
+![image](https://github.com/user-attachments/assets/222163ec-dd1a-40c7-8548-ec01e60b5101)
+
+The area between the core and die is blocked off using logical cell placement blockages to prevent the placer from positioning cells there. Pins are placed in this region and can be equidistant or spaced randomly, depending on the block's input needs. Clock pins are larger than signal pins since they handle large fanout and require lower resistance.
+
+The Power Distribution Network (PDN) is generally implemented during floorplanning, but in this case, it will be done after Clock Tree Synthesis (CTS).
+
+
+## Floorplanning ##
+
+***Reviewing floorplanning.tcl 
+![image](https://github.com/user-attachments/assets/ae025a74-2d38-4375-997d-a485e5136422)
+
+**Running Floorplanning**
+
+Command : run_floorplan
+
+![image](https://github.com/user-attachments/assets/64a818ef-7207-4424-ae42-9c3d6cf469f9)
+
+Lower priority is given to system default (floorplanning.tcl), the next priority is given to config.tcl and then priority is given to PDK varient.tcl (sky130A_sky130_fd_sc_hd_config.tcl).
+
+**Reviewing floorplan related files**
+
+![image](https://github.com/user-attachments/assets/78753a17-39be-458e-971b-22249b68474d)
+
+![image](https://github.com/user-attachments/assets/827321d7-2e50-4b3c-9638-084e4cf60d0b)
+
+**Floorplan results dir**
+
+![image](https://github.com/user-attachments/assets/33ba36fd-3078-4b4b-928f-43c9626f85bb)
+
+
+**Reviewing floorplan.def**
+
+Reviewing floorplan output def file 
+
+![image](https://github.com/user-attachments/assets/76fd8c54-8cc4-48d1-9664-b77982c1a077)
+
+Found DIE AREA from DEF file (DB unit 1000 so to get actual die area in micron, divide the reported DIEAREA value by 1000)
+
+**Die Area from DEF file = (660685/1000) * (671405/1000) = 660.685 * 671.405 = 443587.21 sq microns**
+
+### Using Magic to visualize the created def ###
+<table> </table>
+
+**Magic Layout Window**
+
+![image](https://github.com/user-attachments/assets/9bdb6dfd-1e36-4347-8584-f6135108aeb0)
+ 
+**tkon window**
+
+![image](https://github.com/user-attachments/assets/775d6afe-98ea-4fdc-97db-fd918d08dd8d)
+
+![image](https://github.com/user-attachments/assets/2f5999fa-70c3-42d8-9000-e524fa3ba99a)
+
+As seen all the instances in lower left. Tap cells diagonally equidistant and all pins random but equidistant as FP_IO_MODE is set to 1.
+
+***Querying attributes of a decap:***
+
+![image](https://github.com/user-attachments/assets/1ec81510-5ef3-4ade-aa91-3d9ab754487e)
+
+### Placement ###
+
+Placement is done post placement of blocks and IO pins.
+
+The idea is to take the library information of the cells to implement the netlist on the design and come up with an optimal placement which could possibly pass timing.
+
+![image](https://github.com/user-attachments/assets/11c7827d-5cb4-434c-82d6-21529aad24ab)
+
+![image](https://github.com/user-attachments/assets/a024b757-b556-40e2-af14-69757d1063b6)
+
+Inserting repeaters to optimize the placement 
+
+![image](https://github.com/user-attachments/assets/3263ed66-bd99-4faa-bbba-e07e2429c17c)
+
+![image](https://github.com/user-attachments/assets/5cd152a2-a184-4428-9689-1ede3a73602d)
+
+
+Till now, we only placed the Macros/ IPs along with IO ports. We did not place the standard cells. The idea is to take library information of cells in the design to implement the netlist and come up with an optimal placement which could possibly pass timing. The instances are placed according to the netlist on the design instances close to the pins are placed near the IO pads.
+
+If there are hard paths then placement is performed and then based on wireload estimations cap is calculated and if slew threshold is not met buffers are added to regenerate the signals and help with signal integrity.
+
+To do this, we do placement. Placement is of two types:
+
+Global placement : Coarse placement and no legalizations considered
+Detailed placement: legalizations are done (for example, where instances are placed according to standard cell rows.)
+To run placement, the command is run_placement
+
+![image](https://github.com/user-attachments/assets/ecf9c88e-c0db-420e-9eb4-7814a37a610e)
+
+***Placemenr results dir***
+
+![image](https://github.com/user-attachments/assets/3b669946-8625-4bf1-83a3-4c29cba2bd74)
+
+***Layout after placement in Magic**
+
+![image](https://github.com/user-attachments/assets/95a989fe-9787-4091-8a27-9e6038ebe956)
+
+### Cell design flow ###
+
+![image](https://github.com/user-attachments/assets/470c2878-5e64-4168-9a78-27898940d12e)
+
+We need to first design a cell according to the inputs as shown above. Spice models contain fixed information from foundry like VTHO, tox, capacitances, etc. There could be a lot of user defined specification like cell height, drive strengths, VM (point where Vin == Vout), position of pins, supply voltage, pin layers required, drawn gate length.
+
+In circuit design the circuit is implemented to get required functionality and W/L is found for PMOS and NMOS for creating layout.
+
+Euler's path is used to come up with stick diagrams and are then implemented according to DRC rules.
+
+The stage is design is complete. Now the characterization is performed to obtain .libs.
+
+
+Charactization is of three types and performed in GUNA(spice simulator):
+![image](https://github.com/user-attachments/assets/2f73ab60-a7f4-4b92-96d2-549dea7b2e49)
+
+<Timimng characterization> 
+
+## Day 3 ##
+
+**Modifying the def and jump starting floorplan**
+
+Modifying the floorplan.tcl 
+
+![image](https://github.com/user-attachments/assets/c933d63d-e2fe-4b5e-831c-188f94c6515d)
+
+![image](https://github.com/user-attachments/assets/1a2f5aa5-c507-491d-aa24-a6552401a25f)
+
+Changed floorplan tracks.info
+
+![image](https://github.com/user-attachments/assets/a1060777-b5c6-4057-9f4b-3567bc4b193d)
+
+### Mask Layer based CMOS fabrication ###
+
+Selecting the appropriate substrate, here we choose p type:
+
+![image](https://github.com/user-attachments/assets/0470e0c5-5a3e-427b-859b-2802b55db299)
+
+To create active regions, the first step is to grow a silicon oxide layer that will serve as an insulator. Next, a layer of Si3N4 is deposited on top. After this, photoresist is applied, and UV light is projected onto the areas to be removed. The red regions are protected by a mask, while the rest of the exposed regions react and can be washed away.
+
+![image](https://github.com/user-attachments/assets/7c365fff-aec1-4584-916f-2569312ba4c9)
+
+![image](https://github.com/user-attachments/assets/327a9a18-bee5-4278-b68d-242044603e29)
+
+![image](https://github.com/user-attachments/assets/eb7adc4d-7a2f-4590-8d88-10cb19552f41)
+
+![image](https://github.com/user-attachments/assets/d244916c-49ea-499d-a345-86ad5100a719)
+
+
+Next step is to remove the photoresist.
+
+
+![image](https://github.com/user-attachments/assets/f4a5c8b0-e641-4bed-bb90-6cdc44196ec0)
+
+![image](https://github.com/user-attachments/assets/781ebb84-5f18-4fc2-bb08-c8f024c08884)
+
+![image](https://github.com/user-attachments/assets/0af2f0cf-d241-47af-bb62-52210b89ae7f)
+
+
+Next step is to remove or etch out the Si3N4.
+
+
+![image](https://github.com/user-attachments/assets/86c856eb-faad-4707-8e94-9994823590d4)
+
+
+Next, we need to create the n-well and p-well.
+
+The n-well is used for PMOS fabrication, and the p-well is used for NMOS fabrication. Since both cannot be fabricated simultaneously, one area must be protected while the other is being processed.
+
+The same steps are followed here: a layer of photoresist is deposited, and the pattern for the area to be protected is defined. Mask2 is then used to shield one area while fabricating the other.
+
+
+![image](https://github.com/user-attachments/assets/90a6caa5-ff00-4e9e-a9f9-b7043c871424)
+
+
+Next step is to expose this photoresist to the UV light. So, same this UV light will react only to the exposed photoresist area.
+
+![image](https://github.com/user-attachments/assets/cf4021e9-9839-4de3-97d9-7ef70eda1017)
+
+
+When we wash this particular thing into a solution, that exposed area of photoresist will washed away.
+
+![image](https://github.com/user-attachments/assets/d9f37b7a-f84e-49b3-882f-7cf54d35b302)
+
+We do ion implantation with boron atoms in this region. The oxide layer will be damnaged but will be taken care later.
+
+![image](https://github.com/user-attachments/assets/c33100db-658e-4b3f-b7d8-e7fe600d9a47)
+
+
+![image](https://github.com/user-attachments/assets/bc6164bf-9348-4078-941f-18cce858ecfe)
+
+
+![image](https://github.com/user-attachments/assets/8f2e1f01-4ac1-4c58-88d0-2b2421cb38b2)
+
+
+![image](https://github.com/user-attachments/assets/32786eea-b57b-4c71-9773-39c81d9eb9eb)
+
+Now heat up the chip to reach required depth for the n and p well
+
+![image](https://github.com/user-attachments/assets/ddb297af-7c65-448e-b9fb-16047a3501a0)
+
+Threshold voltage is a function of doping concentration and oxide thickness. Hence it is important to be able to vary this.
+
+
+![image](https://github.com/user-attachments/assets/8ce4e4d2-d9f5-4396-a51a-8274d20bf108)
+
+
+![image](https://github.com/user-attachments/assets/b0ced528-43b8-4987-a0ae-b9d87ef211d3)
+
+
+![image](https://github.com/user-attachments/assets/2a6dd3ac-0b26-4cbd-bbe0-69747b5b05f3)
+
+
+![image](https://github.com/user-attachments/assets/9e5390ea-9b9e-4596-bfdf-e2549132640d)
+
+![image](https://github.com/user-attachments/assets/6d70d734-a379-45e6-9eda-3bc64547ed9a)
+
+
+![image](https://github.com/user-attachments/assets/eedd8032-f123-40c4-93e9-7b74715b29c1)
+
+
+![image](https://github.com/user-attachments/assets/6473bcca-4935-425b-82b1-821f5a7fb688)
+
+
+![image](https://github.com/user-attachments/assets/2439fd66-ce16-4934-a163-2d6b38a6c92b)
+
+
+
+![image](https://github.com/user-attachments/assets/9b874e8e-ab19-4cca-867c-219b786b6741)
+
+
+![image](https://github.com/user-attachments/assets/34ee1d2e-ed49-423c-8956-f9eef40dc4ed)
+
+![image](https://github.com/user-attachments/assets/c49361c3-c1f0-4a02-8fd0-8d592285db74)
+
+
+![image](https://github.com/user-attachments/assets/87d4c82e-fa03-4491-b573-5827540b259e)
+
+![image](https://github.com/user-attachments/assets/1ea988e8-a1ec-4295-96e5-42ee29ce8d3f)
+
+Till here, we have the local interconnects (0 level of metal), 1st level of interconnects (Aluminium interconnects).
+
+Now the next step is to again take this metal levels to the higher level metal.
+
+![image](https://github.com/user-attachments/assets/0a7c3932-a07c-459c-87d7-a1628c1b0cc8)
+
+![image](https://github.com/user-attachments/assets/a67ad2ae-36a9-494d-9647-b83faf01679d)
+
+![image](https://github.com/user-attachments/assets/db0e75b6-469e-4aed-abc3-66178acb74a8)
+
+Final ooutcome": 
+
+![image](https://github.com/user-attachments/assets/094628ae-dc33-40eb-83d9-8eaf9f27bddd)
+
+
+**Design library cell using Magic layout and ngspice characterization**
+
+
+Git cloning
+
+![image](https://github.com/user-attachments/assets/c0c51808-8bd2-4650-ab04-e0aaae83a850)
+
+
+Opening inverter layout 
+
+![image](https://github.com/user-attachments/assets/721d01bc-48e0-4216-9675-b5ea043228c8)
+
+Extracting the inverter & creating spice file:
+
+![image](https://github.com/user-attachments/assets/16b3fa9f-2233-48b8-a611-93862689b99c)
+
+![image](https://github.com/user-attachments/assets/7038b7c9-5c87-4664-a21b-03b65060dca9)
+
+
+running the spice netlist:
+
+![image](https://github.com/user-attachments/assets/39f3cfec-78aa-4aac-ad31-39e898b59f60)
+
+![image](https://github.com/user-attachments/assets/2a480cf4-5438-462e-b3f9-5bb49b1c9a81)
+
+
+***DRC checks***
+
+Magicrc file 
+
+![image](https://github.com/user-attachments/assets/69da132e-521a-4f84-b371-7d2b476c66ce)
+
+
+View in Magic 
+
+![image](https://github.com/user-attachments/assets/37ef0d36-7ffb-41ee-a86e-a91909f2ab59)
+
+Opening MET3 in magic layout 
+![image](https://github.com/user-attachments/assets/df1aa788-f806-434c-9564-305ec5a0fa57)
+
+10 DRC violations found.
+
+![image](https://github.com/user-attachments/assets/28b6b547-d9bb-475e-8927-3ab7a8cdea36)
+
+Selecting a part of layout by left click and right click and hen press : drc why. It gives the reason for DRC violation and rule no.
+
+![image](https://github.com/user-attachments/assets/6acebd96-6974-4da5-a48d-2d11be72d87a)
+
+Rule 
+
+![image](https://github.com/user-attachments/assets/15ed3fb9-dabb-41b7-8a93-be61ac45fc24)
+
+
+Openinh tech file 
+
+![image](https://github.com/user-attachments/assets/7c646292-e7fb-4540-a1de-f76a6739fbfa)
+
+No rule defined between poly resistor to poly. Adding rule:
+
+![image](https://github.com/user-attachments/assets/fad09b73-7652-49fc-9630-dbeb68dbbb1d)
+
+tech load sky130A.tech 
+
+Run DRC again and check
+
+## Day 4 Pre layout design & clock Tree Synthsesis 
+
+ 
 
 Timing modeling using delay tables
 
