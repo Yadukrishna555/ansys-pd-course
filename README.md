@@ -36,6 +36,11 @@ Workshop Github material https://github.com/google/skywater-pdk https://github.c
 
 Openlane directory structure
 
+![image](https://github.com/user-attachments/assets/8f7a0f48-5c1a-48a9-8bb7-8dfde34e0e53)
+
+
+PDK dir - Having all the information such as lib, tech, lef verilog files etc for various open technologies including sky130A 
+
 ![image](https://github.com/user-attachments/assets/f781a17e-b9e8-461f-b77a-8454d8a0ff67)
 
 ![image](https://github.com/user-attachments/assets/ea4fe63a-768a-455c-ab1d-4c7d8f2fd657)
