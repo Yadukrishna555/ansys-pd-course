@@ -1,12 +1,20 @@
-# *Physical Design Training**
+# Physical Design Training
 
-## Overview
+## *Overview*
 ![image](https://github.com/user-attachments/assets/dfbef3dc-cc12-43ea-96b2-f972bc6c5ab3)
 
-Important Links
-VSD-IAT
+### Reference links 
 
-nickson-jose/vsdstdcelldesign: This repository contains all the information needed to run RTL2GDSII flow using openlane flow. Apart from that, it also contain procedures on how to create a custom LEF file and plugging it into an openlane flow. (github.com)
+Git hub link : [https://github.com/hari-govind-p-k-2k/ansys-pd-course/blob/main/url](url)
+
+Youtube video : [https://github.com/hari-govind-p-k-2k/ansys-pd-course/blob/main/url](url)
+
+## OPENLANE
+
+![image](https://github.com/user-attachments/assets/410708ec-491c-4734-96eb-cab0363d21f7)
+
+![image](https://github.com/user-attachments/assets/e968a17c-2c31-4cfc-821e-53e77af12f96)
+
 
 To continue working on a particular run folder, <desired_tage> is the folder name:
 
