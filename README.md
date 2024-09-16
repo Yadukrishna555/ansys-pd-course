@@ -96,8 +96,45 @@ Chip area after synthesis = 147712.918400
 #### Flop Ratio = Number of D flip flops/total no of cells = 1613/14876 = 0.01908 = 10.8429% ####
 
 
+## DAY 2 floor Planning & Placement ##
+
+***Core & Die***
+![image](https://github.com/user-attachments/assets/a521784c-a343-4ce3-b673-108b2aa8ddde)
+
+![image](https://github.com/user-attachments/assets/e9e77780-abcb-43bc-be84-413f95e6c557)
+
+![image](https://github.com/user-attachments/assets/d78d3b26-08d3-40b1-83da-dd90c38f3675)
+
+### Utilization factor ###
+
+![image](https://github.com/user-attachments/assets/dab3dd61-4f14-470e-ac12-feb98d2ad64d)
+
+The utilization ratio is typically set between 0.5 and 0.6 for optimizations, decoupling capacitors (decaps), and routing. These parameters can be controlled using specific keywords.
+
+***Aspect ratio = core height/core width***
 
 
+### Preplaced cells ###
+
+![image](https://github.com/user-attachments/assets/73c31111-60c7-406e-b8a9-eccc52348cad)
+
+Floorplanning is done before placement to position pre-placed cells or blocks. This process fixes their positions and creates blockages for the placer in that area. Blocks are formed by partitioning the logic and assigning pins, then handed off to block owners for implementation, with guidance on area and dimensions. Blocks usually consist of cells that are repeated multiple times across the design or contain complex logic.
+
+Placing these blocks is an optimization problem that considers factors such as proximity to ports and the order in which the blocks operate. Flylines help determine block placement during this phase.
+
+### Need of Decaps ###
+
+![image](https://github.com/user-attachments/assets/de201ff4-07cb-429a-bcd5-7ab98ee9119e)
+
+For any signal to be considered as logic '0' and logic '1', it should be in the Noise Margin. 
+
+Decoupling capacitors (decaps) act as local charge sources for instances, charging when no switching occurs and providing charge when switching happens. This helps reduce dynamic voltage drops. Decaps are typically placed around the blocks.
+
+
+![image](https://github.com/user-attachments/assets/db711b5b-45d7-41a3-bcd4-a39579adfe83)
+
+Decaps will ensure all the switching captured and no crosstalk problems.
+A single pathway for power delivery results in IR drop, even with decaps, as decaps can only charge up to Vsource - IR. Using a grid structure is crucial because it provides multiple pathways for different instances.
 
 **Day 4** 
 
