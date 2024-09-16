@@ -40,7 +40,7 @@ Openlane directory structure
 
 
 PDK dir - Having all the information such as lib, tech, lef verilog files etc for various open technologies including sky130A 
-
+Wentr through the flow.tcl, tech.lef and other files.
 ![image](https://github.com/user-attachments/assets/f781a17e-b9e8-461f-b77a-8454d8a0ff67)
 
 ![image](https://github.com/user-attachments/assets/ea4fe63a-768a-455c-ab1d-4c7d8f2fd657)
@@ -52,6 +52,31 @@ PDK dir - Having all the information such as lib, tech, lef verilog files etc fo
 
 
 ![image](https://github.com/user-attachments/assets/5b613966-4279-4824-9841-92fd778dfde0)
+
+***Invoking openlane***
+
+![image](https://github.com/user-attachments/assets/36def94b-eafd-48fe-a239-e73434af7c68)
+
+.flow.tcl can run full process step by step 
+
+***import all the packages needed to run the flow***
+
+![image](https://github.com/user-attachments/assets/c43a6d57-07b0-49ed-bb9d-6f09fb834261)
+
+Reviewing design related files of picorv32a 
+
+![image](https://github.com/user-attachments/assets/9530284b-e706-46cf-a691-4178543a8eba)
+
+Reviewing config.tcl
+
+![image](https://github.com/user-attachments/assets/3f61b924-bb28-4331-9c6c-ab4e764face3)
+
+Priority wise : Default setting from openlane < config.tcl < sky130A_sky130_fd_sc_hd_config.tcl
+
+**Design preparation step**
+prep -design picorv32a
+![image](https://github.com/user-attachments/assets/aecb44c5-38b3-43cd-af5a-46f30ba676b1)
+
 
 
 
