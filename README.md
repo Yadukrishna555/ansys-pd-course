@@ -1,6 +1,9 @@
-# **Day 0**
+# *Physical Design Training**
 
- Important Links
+## Overview
+![image](https://github.com/user-attachments/assets/dfbef3dc-cc12-43ea-96b2-f972bc6c5ab3)
+
+Important Links
 VSD-IAT
 
 nickson-jose/vsdstdcelldesign: This repository contains all the information needed to run RTL2GDSII flow using openlane flow. Apart from that, it also contain procedures on how to create a custom LEF file and plugging it into an openlane flow. (github.com)
