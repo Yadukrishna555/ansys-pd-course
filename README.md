@@ -74,7 +74,9 @@ Reviewing config.tcl
 Priority wise : Default setting from openlane < config.tcl < sky130A_sky130_fd_sc_hd_config.tcl
 
 **Design preparation step**
+
 prep -design picorv32a
+
 ![image](https://github.com/user-attachments/assets/aecb44c5-38b3-43cd-af5a-46f30ba676b1)
 
 
