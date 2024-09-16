@@ -29,8 +29,8 @@ We will be uswe Openlane to do the RTL2GDS flow for a design called picorv32a .
 
 To continue working on a particular run folder, <desired_tage> is the folder name:
 
-prep -design <design_name> -tag <desired_tag>
-Workshop Github material https://github.com/google/skywater-pdk https://github.com/nickson-jose/vsdstdcelldesign ttps://sourceforge.net/projects/ngspice/ https://github.com/ https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf
+Workshop Github material https://github.com/google/skywater-pdk https://github.com/nickson-jose/vsdstdcelldesign
+https://github.com/ https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf
 
 ## Day 1 ##
 
