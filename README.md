@@ -15,15 +15,26 @@ Youtube video : [https://github.com/hari-govind-p-k-2k/ansys-pd-course/blob/main
 
 ![image](https://github.com/user-attachments/assets/e968a17c-2c31-4cfc-821e-53e77af12f96)
 
+**Openlane ->**
+
+OpenLane is an open-source, automated RTL-to-GDSII flow for digital chip design. It is designed to support end-to-end chip development using open-source tools, primarily leveraging the SkyWater 130nm process node. 
+OpenLane integrates various tools like Yosys (for synthesis), OpenROAD (for placement and routing), Magic (for layout verification), and others, providing a complete flow for hardware designers to tape out chips with minimal manual intervention. 
+Skywater PDK : This PDK is an open-source package that provides the necessary data, models, and tools to design and manufacture chips using their 130nm process. It was released in collaboration with Google to promote innovation in the chip design ecosystem by allowing designers to prototype, verify, and manufacture their designs in an open and accessible manner.
+
+***Openlane Flow***
+
+![image](https://github.com/user-attachments/assets/7a5c4401-8680-4c6e-9eb2-8ac6a6134482)
+
+We will be uswe Openlane to do the RTL2GDS flow for a design called picorv32a . 
 
 To continue working on a particular run folder, <desired_tage> is the folder name:
 
 prep -design <design_name> -tag <desired_tag>
 Workshop Github material https://github.com/google/skywater-pdk https://github.com/nickson-jose/vsdstdcelldesign ttps://sourceforge.net/projects/ngspice/ https://github.com/ https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf
 
-**Day 1**
+## Day 1 ##
 
-open lane directory structure
+Openlane directory structure
 
 ![image](https://github.com/user-attachments/assets/f781a17e-b9e8-461f-b77a-8454d8a0ff67)
 
