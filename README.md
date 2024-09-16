@@ -1,4 +1,4 @@
-**Day 0**
+### **Day 0**
 
  Important Links
 VSD-IAT
@@ -10,7 +10,8 @@ To continue working on a particular run folder, <desired_tage> is the folder nam
 prep -design <design_name> -tag <desired_tag>
 Workshop Github material https://github.com/google/skywater-pdk https://github.com/nickson-jose/vsdstdcelldesign ttps://sourceforge.net/projects/ngspice/ https://github.com/ https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf
 
-Day 1
+**Day 1**
+
 open lane directory structure
 
 ![image](https://github.com/user-attachments/assets/f781a17e-b9e8-461f-b77a-8454d8a0ff67)
@@ -34,7 +35,7 @@ open lane directory structure
 
 
 
-Day 4 
+**Day 4** 
 
 Timing modeling using delay tables
 
