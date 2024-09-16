@@ -79,10 +79,17 @@ prep -design picorv32a
 
 ![image](https://github.com/user-attachments/assets/aecb44c5-38b3-43cd-af5a-46f30ba676b1)
 
+***Running synthesis***
+
+![image](https://github.com/user-attachments/assets/390cc50a-4879-4f98-a3a6-84515e73fdbf)
 
 
+**Chip Area**
+![image](https://github.com/user-attachments/assets/a7432186-24e5-4787-9825-3047aa7f32be)
 
+Chip area after synthesis = 147712.918400
 
+### Calculating Flop Ratio ###
 
 
 
