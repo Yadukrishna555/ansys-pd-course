@@ -91,6 +91,9 @@ Chip area after synthesis = 147712.918400
 
 ### Calculating Flop Ratio ###
 
+![image](https://github.com/user-attachments/assets/7101946e-35c0-4a8f-b3f9-976174027794)
+
+#### Flop Ratio = Number of D flip flops/total no of cells = 1613/14876 = 0.01908 = 10.8429% ####
 
 
 
