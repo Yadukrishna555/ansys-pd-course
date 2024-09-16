@@ -27,9 +27,9 @@ Skywater PDK : This PDK is an open-source package that provides the necessary da
 
 We will be uswe Openlane to do the RTL2GDS flow for a design called picorv32a . 
 
-To continue working on a particular run folder, <desired_tage> is the folder name:
-
-Workshop Github material https://github.com/google/skywater-pdk https://github.com/nickson-jose/vsdstdcelldesign
+**Workshop Github material :**
+https://github.com/google/skywater-pdk 
+https://github.com/nickson-jose/vsdstdcelldesign
 https://github.com/ https://www.vlsisystemdesign.com/wp-content/uploads/2017/07/Introduction-to-Industrial-Physical-Design-Flow.pdf
 
 ## Day 1 ##
